@@ -2,9 +2,9 @@ import re, mimetypes, os, sys, datetime
 from BaseServers import *
 
 def log(s):
-    print('['+str(datetime.datetime.now())+']: '+s)
-
-allowedFileTypes = ['.html', '.css', '.js']
+    logcont='\n['+str(datetime.datetime.now())+']: '+s
+    print(logcont)
+    open('logs/server.log').write(logcont)
 
 class WalrusSocialServer(BaseHTTPRequestHandler):
     def log_request(*args):
@@ -18,10 +18,11 @@ class WalrusSocialServer(BaseHTTPRequestHandler):
     def requestAcceptable(self):
         tests = []
         p=self.getPath()
-        for x in allowedFileTypes:
-            if p.endswith(x):
-                tests.append(True)
-                break
+        #for x in allowedFileTypes:
+        #    if p.endswith(x):
+        #        tests.append(True)
+        #        break
+        tests.append(True)
         else:
             tests.append(False)
         return(all(tests))
