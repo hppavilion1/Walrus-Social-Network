@@ -1,14 +1,16 @@
-import re, mimetypes, os, sys, datetime, re
+import re, mimetypes, os, sys, datetime, re, atexit
 from BaseServers import *
-import users
+import users, WalDB
 
 
 settings={}
 rw={}
 
+db = {}
+
 def loadConfig():#Open configuration files and save their options to settings
     print('Loading configuration files')
-    print('\tLoading settings...')                
+    print('\tLoading settings...')
     
     for root, dirs, files in os.walk('config/settings/'): #Open all files in config directory
         for f in files:
@@ -78,18 +80,28 @@ class WalrusSocialServer(BaseHTTPRequestHandler):
         self.logCommand()
         p=self.getPath()
         if self.requestAcceptable():
-            log('Request Acceptable')
+            log('Request Accepted')
             self.sendHeaders()
             self.wfile.write(open(p).read())
         else:
-            log('Request Unacceptable')
+            log('Request Denied')
 
     def do_POST(self):
         pass
 
+    def exitserver(self):
+        global s
+        for x in db:
+            db[x].save()
+        s.server_close()
+        
+        log('Server Closes')
+
 
 def serve():
+    global s
     s=HTTPServer(('', 80), WalrusSocialServer)
     log('Server Starts')
     s.serve_forever()
+
 serve()

@@ -1,0 +1,38 @@
+body {
+	background-color:gray;
+	margin: 0;
+	padding: 0 auto;
+}
+.menu li {
+	list-style:none;
+	float:right;
+	font:12px Verdana, Arial, Helvetica, sans-serif #111;
+}
+
+.menu li a:link, .menu li a:visited {
+	display:block;
+	text-decoration:none;
+	background-color:#978;
+	padding: 0.1em 1em;
+	margin:0;
+	border-right: 0px solid #fff;
+	color:#111;
+}
+
+.menu li a:hover {
+	background-color:#0CF;
+}
+
+.usernametext {
+	border-right: 120px solid #fff;
+}
+
+.profiledetails {
+	display:block;
+	background-color:#998;
+	padding: 0.1em 1em;
+	margin:0;
+	border-right:0px solid #fff;`
+	color:#111;
+	text-align:center;
+}
