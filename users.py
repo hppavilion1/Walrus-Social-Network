@@ -8,3 +8,5 @@ minUnLen = 1
 def calculate_age(born):
     today = date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+users = WalDB.Table()
